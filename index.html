@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京阪手冊｜老爹的大阪京都行程</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 圖示庫 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 引入獨立的 CSS 樣式表 -->
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', '"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen text-slate-800 font-sans antialiased pb-20">
+
+    <!-- 頂部頁首看板 -->
+    <header class="trip-hero">
+        <div class="hero-image" aria-hidden="true"></div>
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <div class="hero-eyebrow"><span class="sun-mark" aria-hidden="true"></span> JAPAN ·JOURNAL</div>
+                <p class="hero-date"><i class="fa-regular fa-calendar"></i> 2026 年 1 月 4 日 — 10 日</p>
+                <h1>老爹的<br><span>京阪手冊</span></h1>
+                <p class="hero-description">我在找路找行程得時候<br class="mobile-break">就滑一下看景點人文歷史</p>
+                <div class="hero-location"><i class="fa-solid fa-location-dot"></i> 京都 KYOTO <span>／</span> 大阪 OSAKA</div>
+            </div>
+
+            <aside class="progress-card" aria-label="行程完成進度">
+                <div class="progress-topline"><span>旅行進度</span><span class="progress-caption">YOUR JOURNEY</span></div>
+                <div class="progress-number"><span id="progress-text">0%</span><i class="fa-solid fa-arrow-trend-up"></i></div>
+                <div class="progress-track"><div id="progress-bar" style="width: 0%"></div></div>
+                <p>每完成一站，旅程就更近一點。</p>
+            </aside>
+        </div>
+        <div class="hero-seal" aria-hidden="true">旅</div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="page-shell relative z-10">
+
+        <!-- 天數切換選單按鈕區 -->
+        <div class="day-nav sticky top-2 z-30 mb-5">
+            <div class="glass-card rounded-2xl p-2 shadow-lg border border-white/90">
+                <div class="day-tabs flex overflow-x-auto gap-2 no-scrollbar scroll-smooth py-1 px-1" role="group" aria-label="選擇旅程日期">
+                    <button onclick="switchTab('day1')" class="day-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-medium text-xs shadow-sm transition-all flex flex-col items-center gap-0.5 bg-white text-slate-700 hover:bg-pink-50 min-w-[76px]" data-day="day1" aria-pressed="true">
+                        <span class="text-[10px] opacity-80 uppercase tracking-wider font-bold">1/4 (一)</span>
+                        <span class="font-bold text-xs truncate">祇園</span>
+                    </button>
+                    <button onclick="switchTab('day2')" class="day-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-medium text-xs shadow-sm transition-all flex flex-col items-center gap-0.5 bg-white text-slate-700 hover:bg-pink-50 min-w-[76px]" data-day="day2" aria-pressed="false">
+                        <span class="text-[10px] opacity-80 uppercase tracking-wider font-bold">1/5 (二)</span>
+                        <span class="font-bold text-xs truncate">金閣/清水寺</span>
+                    </button>
+                    <button onclick="switchTab('day3')" class="day-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-medium text-xs shadow-sm transition-all flex flex-col items-center gap-0.5 bg-white text-slate-700 hover:bg-pink-50 min-w-[76px]" data-day="day3" aria-pressed="false">
+                        <span class="text-[10px] opacity-80 uppercase tracking-wider font-bold">1/6 (三)</span>
+                        <span class="font-bold text-xs truncate">嵐山/大阪</span>
+                    </button>
+                    <button onclick="switchTab('day4')" class="day-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-medium text-xs shadow-sm transition-all flex flex-col items-center gap-0.5 bg-white text-slate-700 hover:bg-pink-50 min-w-[76px]" data-day="day4" aria-pressed="false">
+                        <span class="text-[10px] opacity-80 uppercase tracking-wider font-bold">1/7 (四)</span>
+                        <span class="font-bold text-xs truncate">奈良/道頓堀</span>
+                    </button>
+                    <button onclick="switchTab('day5')" class="day-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-medium text-xs shadow-sm transition-all flex flex-col items-center gap-0.5 bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100 min-w-[82px]" data-day="day5" aria-pressed="false">
+                        <span class="text-[10px] text-amber-700 font-bold">1/8 (三) 🏠</span>
+                        <span class="font-bold text-xs text-amber-900 truncate">看房日</span>
+                    </button>
+                    <button onclick="switchTab('day6')" class="day-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-medium text-xs shadow-sm transition-all flex flex-col items-center gap-0.5 bg-white text-slate-700 hover:bg-pink-50 min-w-[76px]" data-day="day6" aria-pressed="false">
+                        <span class="text-[10px] opacity-80 uppercase tracking-wider font-bold">1/9 (四)</span>
+                        <span class="font-bold text-xs truncate">大阪城/夜景</span>
+                    </button>
+                    <button onclick="switchTab('day7')" class="day-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-medium text-xs shadow-sm transition-all flex flex-col items-center gap-0.5 bg-white text-slate-700 hover:bg-pink-50 min-w-[76px]" data-day="day7" aria-pressed="false">
+                        <span class="text-[10px] opacity-80 uppercase tracking-wider font-bold">1/10 (五)</span>
+                        <span class="font-bold text-xs truncate">臨空城/返程</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 提示備忘卡片 -->
+        <div class="tip-banner glass-card rounded-2xl p-3.5 mb-5 shadow-sm border border-white/80 flex items-center justify-between gap-2 text-xs">
+            <div class="flex items-center gap-2 text-rose-600 font-medium truncate">
+                <span class="tip-icon w-6 h-6 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 text-rose-600 text-xs">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </span>
+                <span class="truncate">一些重點</span>
+            </div>
+            <button onclick="toggleAllTips()" class="tips-button bg-slate-800 hover:bg-slate-900 text-white px-3 py-1.5 rounded-xl font-medium flex-shrink-0 transition text-[11px]">
+                Click <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
+        </div>
+
+        <!-- 動態行程注入區塊 (由 script.js 渲染) -->
+        <div id="itinerary-content" class="space-y-4"></div>
+
+    </main>
+
+    <!-- 彈出式重點備忘 Modal 視窗 -->
+    <div id="tips-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative animate-float">
+            <button onclick="toggleAllTips()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 font-bold">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">京阪行・關鍵備忘</h3>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-600 mb-6">
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                    <span><strong>交通卡：</strong> 建議準備 ICOCA 卡，搭乘地鐵、JR 及便利商店購物一卡搞定。</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                    <span><strong>串炸禮儀：</strong> 通天閣吃元祖串炸時，醬汁盆為共用，<strong>絕對只能沾一次</strong>！</span>
+                </li>
+            </ul>
+            <button onclick="toggleAllTips()" class="w-full bg-rose-500 hover:bg-rose-600 text-white py-3 rounded-2xl font-semibold shadow-md transition">
+                老爹知道了！
+            </button>
+        </div>
+    </div>
+
+    <!-- 儲存提示 Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-slate-900/90 backdrop-blur-md text-white px-5 py-3 rounded-2xl shadow-xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3 text-sm font-medium">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toast-msg">進度已自動儲存！</span>
+    </div>
+
+    <footer class="site-footer text-center text-xs text-slate-500 mt-16 py-6 border-t border-slate-200">
+        <p><span>京阪手冊</span>　—　兒子製作 © 2026</p>
+    </footer>
+
+    <!-- 引入獨立的 JavaScript 腳本 -->
+    <script src="script.js"></script>
+</body>
+</html>
